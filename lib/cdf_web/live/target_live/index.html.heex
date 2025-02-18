@@ -1,0 +1,44 @@
+<.header>
+  Listing Targets
+  <:actions>
+    <.link patch={~p"/targets/new"}>
+      <.button>New Target</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="targets"
+  rows={@streams.targets}
+  row_click={fn {_id, target} -> JS.navigate(~p"/targets/#{target}") end}
+>
+  <:col :let={{_id, target}} label="Title">{target.title}</:col>
+  <:col :let={{_id, target}} label="Description">{target.description}</:col>
+  <:col :let={{_id, target}} label="Final review on">{target.final_review_on}</:col>
+  <:col :let={{_id, target}} label="Percentage completion">{target.percentage_completion}</:col>
+  <:action :let={{_id, target}}>
+    <div class="sr-only">
+      <.link navigate={~p"/targets/#{target}"}>Show</.link>
+    </div>
+    <.link patch={~p"/targets/#{target}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, target}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: target.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="target-modal" show on_cancel={JS.patch(~p"/targets")}>
+  <.live_component
+    module={CdfWeb.TargetLive.FormComponent}
+    id={@target.id || :new}
+    title={@page_title}
+    action={@live_action}
+    target={@target}
+    patch={~p"/targets"}
+  />
+</.modal>
