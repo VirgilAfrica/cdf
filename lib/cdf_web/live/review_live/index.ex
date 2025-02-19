@@ -25,11 +25,10 @@ defmodule CdfWeb.ReviewLive.Index do
   end
 
   defp apply_action(socket, :add_review, %{"id" => id}) do
-    review = Reviews.get_review!(id)
-    IO.inspect(review)
     socket
     |> assign(:page_title, "New Review")
     |> assign(:review, %Review{})
+    |> assign(:target_id, id)
   end
 
   defp apply_action(socket, :index, _params) do

@@ -31,7 +31,7 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:add_review]} id="review-modal" show on_cancel={JS.patch(~p"/targets/1")}>
+<.modal :if={@live_action in [:add_review]} id="review-modal" show on_cancel={JS.patch(~p"/targets/#{@target_id}")}>
   <.live_component
     module={CdfWeb.ReviewLive.FormComponent}
     id={@review.id || :new}
@@ -39,6 +39,6 @@
     target={@target}
     action={@live_action}
     review={@review}
-    patch={~p"/targets/1"}
+    patch={~p"/targets/#{@target_id}"}
   />
 </.modal>
