@@ -1,6 +1,6 @@
 <.header>
   Target {@target.id}
-  <:subtitle>This is a target record from your database.</:subtitle>
+  
   <:actions>
     <.link patch={~p"/targets/#{@target}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit target</.button>
@@ -14,6 +14,28 @@
   <:item title="Final review on">{@target.final_review_on}</:item>
   <:item title="Percentage completion">{@target.percentage_completion}</:item>
 </.list>
+
+<h2 class="my-5 font-semibold">Reviews for Target <%= @target.id %></h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Percentage Set</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for review <- @reviews do  %>
+        <tr>
+          <td><%= review.description  %></td>
+          <td><%= review.date_added  %></td>
+          <td><%= review.percentage_set  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
 
 <.back navigate={~p"/targets"}>Back to targets</.back>
 
