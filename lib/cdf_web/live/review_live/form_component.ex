@@ -22,6 +22,7 @@ defmodule CdfWeb.ReviewLive.FormComponent do
         <.input field={@form[:description]} type="text" label="Description" />
         <.input field={@form[:date_added]} type="date" label="Date added" />
         <.input field={@form[:percentage_set]} type="number" label="Percentage set" />
+        <.input field={@form[:target_id]} type="number" label="Target ID" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Review</.button>
         </:actions>

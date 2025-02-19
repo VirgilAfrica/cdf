@@ -7,6 +7,7 @@ defmodule Cdf.Targets.Target do
     field :title, :string
     field :final_review_on, :date
     field :percentage_completion, :integer
+    has_many(:review, Cdf.Reviews.Review)
 
     timestamps(type: :utc_datetime)
   end
