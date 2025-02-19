@@ -3,7 +3,7 @@ defmodule CdfWeb.TargetLive.Show do
   alias Cdf.Repo
   alias Cdf.Targets
   alias Cdf.Reviews.Review
-  import Ecto.Query, only: [from: 2, where: 3]
+  import Ecto.Query
 
   @impl true
   def mount(_params, _session, socket) do

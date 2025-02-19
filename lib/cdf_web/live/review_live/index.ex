@@ -3,10 +3,14 @@ defmodule CdfWeb.ReviewLive.Index do
 
   alias Cdf.Reviews
   alias Cdf.Reviews.Review
+  alias Cdf.Targets
+  alias Cdf.Targets.Target
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :reviews, Reviews.list_reviews())}
+    socket = stream(socket, :reviews, Reviews.list_reviews())
+
+    {:ok, assign(socket, target: %Target{})}
   end
 
   @impl true
@@ -20,7 +24,9 @@ defmodule CdfWeb.ReviewLive.Index do
     |> assign(:review, Reviews.get_review!(id))
   end
 
-  defp apply_action(socket, :new, _params) do
+  defp apply_action(socket, :add_review, %{"id" => id}) do
+    review = Reviews.get_review!(id)
+    IO.inspect(review)
     socket
     |> assign(:page_title, "New Review")
     |> assign(:review, %Review{})
@@ -31,6 +37,9 @@ defmodule CdfWeb.ReviewLive.Index do
     |> assign(:page_title, "Listing Reviews")
     |> assign(:review, nil)
   end
+
+
+
 
   @impl true
   def handle_info({CdfWeb.ReviewLive.FormComponent, {:saved, review}}, socket) do

@@ -66,7 +66,9 @@ defmodule CdfWeb.ReviewLive.FormComponent do
     end
   end
 
-  defp save_review(socket, :new, review_params) do
+
+
+  defp save_review(socket, :add_review, review_params) do
     case Reviews.create_review(review_params) do
       {:ok, review} ->
         notify_parent({:saved, review})

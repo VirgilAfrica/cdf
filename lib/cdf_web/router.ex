@@ -29,7 +29,7 @@ defmodule CdfWeb.Router do
     live "/targets/:id/show/edit", TargetLive.Show, :edit
 
     live "/reviews", ReviewLive.Index, :index
-    live "/reviews/new", ReviewLive.Index, :new
+    live "/targets/:id/add_review", ReviewLive.Index, :add_review
     live "/reviews/:id/edit", ReviewLive.Index, :edit
 
     live "/reviews/:id", ReviewLive.Show, :show
